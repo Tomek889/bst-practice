@@ -209,4 +209,21 @@ class Tree {
 
     traverse(this.root);
   }
+
+  height(value) {
+    const node = this.find(value);
+
+    if (node === null) {
+        return null;
+    }
+
+    function getHeight(node) {
+      if (node === null) {
+        return -1;
+      }
+      return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+    }
+
+    return getHeight(node);
+  }
 }
