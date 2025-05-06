@@ -271,4 +271,17 @@ class Tree {
 
     return checkWhetherBalanced(this.root);
   }
+
+  rebalance() {
+    if (this.root === null) {
+      return null;
+    }
+
+    const array = [];
+    this.inOrder((node) => {
+      array.push(node.data);
+    });
+
+    this.root = this.buildTree(array);
+  }
 }
