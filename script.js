@@ -246,4 +246,29 @@ class Tree {
 
     return getDepth(this.root);
   }
+
+  isBalanced() {
+    function getHeight(node) {
+      if (node === null) {
+        return -1;
+      }
+      return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+    }
+
+    function checkWhetherBalanced(node) {
+      if (node === null) {
+        return true;
+      }
+
+      if (Math.abs(getHeight(node.left) - getHeight(node.right)) > 1) {
+        return false;
+      }
+
+      return (
+        checkWhetherBalanced(node.left) && checkWhetherBalanced(node.right)
+      );
+    }
+
+    return checkWhetherBalanced(this.root);
+  }
 }
