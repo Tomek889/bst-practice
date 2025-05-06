@@ -103,4 +103,24 @@ class Tree {
   deleteItem(value) {
     this.root = this.deleteNode(this.root, value);
   }
+
+  findNode(currentNode, value) {
+    if (currentNode === null) {
+      return null;
+    }
+
+    if (currentNode.data === value) {
+      return currentNode;
+    } else if (currentNode.data > value) {
+        return this.findNode(currentNode.left, value);
+    } else if (currentNode.data < value) {
+        return this.findNode(currentNode.right, value);
+    }
+
+    return null;
+  }
+
+  find(value) {
+    return this.findNode(this.root, value);
+  }
 }
