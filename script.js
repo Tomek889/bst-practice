@@ -214,7 +214,7 @@ class Tree {
     const node = this.find(value);
 
     if (node === null) {
-        return null;
+      return null;
     }
 
     function getHeight(node) {
@@ -225,5 +225,25 @@ class Tree {
     }
 
     return getHeight(node);
+  }
+
+  depth(value) {
+    function getDepth(node, counter = 0) {
+      if (node === null) {
+        return null;
+      }
+
+      if (node.data === value) {
+        return counter;
+      }
+
+      if (node.data > value) {
+        return getDepth(node.left, counter + 1);
+      } else if (node.data < value) {
+        return getDepth(node.right, counter + 1);
+      }
+    }
+
+    return getDepth(this.root);
   }
 }
