@@ -43,4 +43,8 @@ class Tree {
 
     return root;
   }
+
+  insert(value) {
+    
+  }
 }
