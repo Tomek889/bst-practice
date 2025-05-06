@@ -112,9 +112,9 @@ class Tree {
     if (currentNode.data === value) {
       return currentNode;
     } else if (currentNode.data > value) {
-        return this.findNode(currentNode.left, value);
+      return this.findNode(currentNode.left, value);
     } else if (currentNode.data < value) {
-        return this.findNode(currentNode.right, value);
+      return this.findNode(currentNode.right, value);
     }
 
     return null;
@@ -122,5 +122,28 @@ class Tree {
 
   find(value) {
     return this.findNode(this.root, value);
+  }
+
+  leverOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required.");
+    }
+
+    const queue = [];
+    if (this.root !== null) {
+      queue.push(this.root);
+    }
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+      callback(currentNode);
+
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
   }
 }
