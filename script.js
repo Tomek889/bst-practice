@@ -124,7 +124,7 @@ class Tree {
     return this.findNode(this.root, value);
   }
 
-  leverOrder(callback) {
+  levelOrder(callback) {
     if (typeof callback !== "function") {
       throw new Error("A callback is required.");
     }
