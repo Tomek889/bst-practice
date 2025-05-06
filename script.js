@@ -146,4 +146,67 @@ class Tree {
       }
     }
   }
+
+  inOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required.");
+    }
+
+    if (this.root === null) {
+      return;
+    }
+
+    function traverse(node) {
+      if (node === null) {
+        return;
+      }
+      traverse(node.left);
+      callback(node);
+      traverse(node.right);
+    }
+
+    traverse(this.root);
+  }
+
+  preOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required.");
+    }
+
+    if (this.root === null) {
+      return;
+    }
+
+    function traverse(node) {
+      if (node === null) {
+        return;
+      }
+      callback(node);
+      traverse(node.left);
+      traverse(node.right);
+    }
+
+    traverse(this.root);
+  }
+
+  postOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required.");
+    }
+
+    if (this.root === null) {
+      return;
+    }
+
+    function traverse(node) {
+      if (node === null) {
+        return;
+      }
+      traverse(node.left);
+      traverse(node.right);
+      callback(node);
+    }
+
+    traverse(this.root);
+  }
 }
