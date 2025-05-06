@@ -54,9 +54,9 @@ class Tree {
     }
 
     if (value < currentNode.data) {
-      currentNode.left = insertNode(currentNode.left, value);
+      currentNode.left = this.insertNode(currentNode.left, value);
     } else if (value > currentNode.data) {
-      currentNode.right = insertNode(currentNode.right, value);
+      currentNode.right = this.insertNode(currentNode.right, value);
     }
 
     return currentNode;
@@ -64,5 +64,43 @@ class Tree {
 
   insert(value) {
     this.root = this.insertNode(this.root, value);
+  }
+
+  getSuccessor(curr) {
+    curr = curr.right;
+    while (curr !== null && curr.left !== null) {
+      curr = curr.left;
+    }
+    return curr;
+  }
+
+  deleteNode(currentNode, value) {
+    if (currentNode === null) {
+      return currentNode;
+    }
+
+    if (currentNode.data > value) {
+      currentNode.left = this.deleteNode(currentNode.left, value);
+    } else if (currentNode.data < value) {
+      currentNode.right = this.deleteNode(currentNode.right, value);
+    } else {
+      if (currentNode.left === null) {
+        return currentNode.right;
+      }
+
+      if (currentNode.right === null) {
+        return currentNode.left;
+      }
+
+      let successor = this.getSuccessor(currentNode);
+      currentNode.data = successor.data;
+      currentNode.right = this.deleteNode(currentNode.right, successor.data);
+    }
+
+    return currentNode;
+  }
+
+  deleteItem(value) {
+    this.root = this.deleteNode(this.root, value);
   }
 }
